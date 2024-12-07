@@ -3,13 +3,13 @@ url: "https://lichess.org/"        # Lichess base URL.
 
 engine:                            # Engine settings.
   dir: "./engines/"                # Directory containing the engine. This can be an absolute path or one relative to lichess-bot/.
-  name: "RandomMove"              # Binary name of the engine to use.
+  name: "stockfish-17"              # Binary name of the engine to use.
 # interpreter: "java"
 # interpreter_options:
 #   - "-jar"
   working_dir: ""                  # Directory where the chess engine will read and write files. If blank or missing, the current directory is used.
                                    # NOTE: If working_dir is set, the engine will look for files and directories relative to this directory, not where lichess-bot was launched. Absolute paths are unaffected.
-  protocol: "homemade"                  # "uci", "xboard" or "homemade"
+  protocol: "uci"                  # "uci", "xboard" or "homemade"
   ponder: true                     # Think on opponent's time.
 
   polyglot:
@@ -48,21 +48,21 @@ engine:                            # Engine settings.
       move_quality: "good"         # One of "all", "good", "best".
       min_depth: 20                # Only for move_quality: "best".
     lichess_cloud_analysis:
-      enabled: false               # Whether or not to use lichess cloud analysis.
+      enabled: true               # Whether or not to use lichess cloud analysis.
       min_time: 20                 # Minimum time (in seconds) the bot must have to use cloud analysis.
       move_quality: "best"         # One of "good", "best".
       max_score_difference: 50     # Only for move_quality: "good". The maximum score difference (in cp) between the best move and the other moves.
       min_depth: 20
       min_knodes: 0
     lichess_opening_explorer:
-      enabled: false
+      enabled: true
       min_time: 20
       source: "masters"            # One of "lichess", "masters", "player"
       player_name: ""              # The lichess username. Leave empty for the bot's username to be used. Used only when source is "player".
       sort: "winrate"              # One of "winrate", "games_played"
       min_games: 10                # Minimum number of times a move must have been played to be chosen.
     online_egtb:
-      enabled: false               # Whether or not to enable online endgame tablebases.
+      enabled: true               # Whether or not to enable online endgame tablebases.
       min_time: 20                 # Minimum time (in seconds) the bot must have to use online EGTBs.
       max_pieces: 7                # Maximum number of pieces on the board to use endgame tablebases.
       source: "lichess"            # One of "lichess", "chessdb".
@@ -91,7 +91,7 @@ engine:                            # Engine settings.
 
   uci_options:                     # Arbitrary UCI options passed to the engine.
     Move Overhead: 100             # Increase if your bot flags games too often.
-    Threads: 4                     # Max CPU threads the engine can use.
+    Threads: 5                     # Max CPU threads the engine can use.
     Hash: 512                      # Max memory (in megabytes) the engine can allocate.
     SyzygyPath: "./syzygy/"        # Paths to Syzygy endgame tablebases that the engine reads.
     UCI_ShowWDL: true              # Show the chance of the engine winning.
@@ -114,7 +114,7 @@ engine:                            # Engine settings.
 
   silence_stderr: false            # Some engines (yes you, Leela) are very noisy.
 
-abort_time: 30                     # Time to abort a game in seconds when there is no activity.
+abort_time: 600                     # Time to abort a game in seconds when there is no activity.
 fake_think_time: false             # Artificially slow down the bot to pretend like it's thinking.
 rate_limiting_delay: 0             # Time (in ms) to delay after sending a move to prevent "Too Many Requests" errors.
 move_overhead: 2000                # Increase if your bot flags games too often.
@@ -130,13 +130,13 @@ correspondence:
 challenge:                         # Incoming challenges.
   concurrency: 1                   # Number of games to play simultaneously.
   sort_by: "best"                  # Possible values: "best" and "first".
-  preference: "none"               # Possible values: "none", "human", "bot".
+  preference: "human"               # Possible values: "none", "human", "bot".
   accept_bot: true                 # Accepts challenges coming from other bots.
   only_bot: false                  # Accept challenges by bots only.
-  max_increment: 20                # Maximum amount of increment to accept a challenge in seconds. The max is 180. Set to 0 for no increment.
+  max_increment: 180                # Maximum amount of increment to accept a challenge in seconds. The max is 180. Set to 0 for no increment.
   min_increment: 0                 # Minimum amount of increment to accept a challenge in seconds.
-  max_base: 1800                   # Maximum amount of base time to accept a challenge in seconds. The max is 10800 (3 hours).
-  min_base: 0                      # Minimum amount of base time to accept a challenge in seconds.
+  max_base: 10800                   # Maximum amount of base time to accept a challenge in seconds. The max is 10800 (3 hours).
+  min_base: 60                      # Minimum amount of base time to accept a challenge in seconds.
   max_days: 14                     # Maximum number of days per move to accept a challenge for a correspondence game.
                                    # Unlimited games can be accepted by removing this field or specifying .inf
   min_days: 1                      # Minimum number of days per move to accept a challenge for a correspondence game.
@@ -144,22 +144,22 @@ challenge:                         # Incoming challenges.
     - standard
 #   - fromPosition
 #   - antichess
-#   - atomic
-#   - chess960
-#   - crazyhouse
-#   - horde
+    - atomic
+    - chess960
+    - crazyhouse
+    - horde
     - kingOfTheHill
-#   - racingKings
-#   - threeCheck
+    - racingKings
+    - threeCheck
   time_controls:                   # Time controls to accept (bots are not allowed to play ultraBullet).
     - bullet
     - blitz
     - rapid
     - classical
-#   - correspondence
+    - correspondence
   modes:                           # Game modes to accept.
     - casual                       # Unrated games.
-    - rated                        # Rated games - must comment if the engine doesn't try to win.
+#    - rated                        # Rated games - must comment if the engine doesn't try to win.
 # block_list:                      # List of users from which the challenges are always declined.
 #   - user1
 #   - user2
