@@ -1,13 +1,9 @@
-token: "lip_Inx4cbGUc9teng9JZz3v"    # Lichess OAuth2 Token.
+token: "token_here"    # Lichess OAuth2 Token.
 url: "https://lichess.org/"        # Lichess base URL.
 
 engine:                            # Engine settings.
   dir: "./engines/"                # Directory containing the engine. This can be an absolute path or one relative to lichess-bot/.
-<<<<<<< HEAD
   name: "stockfishw-17.exe"              # Binary name of the engine to use.
-=======
-  name: "stockfish-17"              # Binary name of the engine to use.
->>>>>>> 3adf8514bee9503576ec7c0aa60ea124a6ee57d2
 # interpreter: "java"
 # interpreter_options:
 #   - "-jar"
@@ -21,8 +17,8 @@ engine:                            # Engine settings.
     book:
       standard:                    # List of book file paths for variant standard.
         - engines/gm2600.bin
-      atomic:                      # List of book file paths for variant atomic.
-        - engines/KomodoVariety.bin
+#     atomic:                      # List of book file paths for variant atomic.
+#       - engines/KomodoVariety.bin
 #       - engines/atomicbook2.bin
 #     etc.
 #     Use the same pattern for 'chess960', 'giveaway' (antichess), 'crazyhouse', 'horde', 'kingofthehill', 'racingkings' and '3check' as well.
@@ -121,7 +117,7 @@ fake_think_time: false             # Artificially slow down the bot to pretend l
 rate_limiting_delay: 0             # Time (in ms) to delay after sending a move to prevent "Too Many Requests" errors.
 move_overhead: 5000                # Increase if your bot flags games too often.
 max_takebacks_accepted: 5          # The number of times to allow an opponent to take back a move in a game.
-quit_after_all_games_finish: true # If set to true, then pressing Ctrl-C to quit will only stop lichess-bot after all current games have finished.
+quit_after_all_games_finish: false # If set to true, then pressing Ctrl-C to quit will only stop lichess-bot after all current games have finished.
 
 correspondence:
   move_time: 60                    # Time in seconds to search in correspondence games.
@@ -160,7 +156,7 @@ challenge:                         # Incoming challenges.
     - correspondence
   modes:                           # Game modes to accept.
     - casual                       # Unrated games.
-#    - rated                        # Rated games - must comment if the engine doesn't try to win.
+    - rated                        # Rated games - must comment if the engine doesn't try to win.
 # block_list:                      # List of users from which the challenges are always declined.
 #   - user1
 #   - user2
@@ -203,7 +199,7 @@ matchmaking:
     - 1
     - 2
     - 3
-    -5
+    - 5
     - 10
     - 15
     - 30
